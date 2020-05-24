@@ -1,0 +1,43 @@
+body {
+    font-size: 2rem;
+    width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    height: 100px;
+    text-align: center;
+}
+div {
+    display: flex;
+    flex: 1;
+}
+main {
+    flex: 1;
+}
+footer {
+    height: 300px;
+}
+
+p#contents1{
+    text-align: center;
+}
+p#scaleArea{
+    text-align: center;
+    font-size: 300%;
+    line-height: 1px;
+}
+
+button {
+    padding: 0.5em 1em;
+    border-width: 0;
+    border-radius: 0.25em;
+    font-size: 1em;
+    background-color: #dfdfdf;
+    color: #333;
+}
+button[disabled] {
+    color: #aaa;
+}
