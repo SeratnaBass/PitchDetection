@@ -1,10 +1,10 @@
 # PitchDetectionについて
 
-webブラウザ上で、PC付属のまたはPCに接続されたマイクに音声を入力し、その音声データにMPMアルゴリズムに基づいた処理を施すことで、入力音声の周波数(ピッチ)を検出するプログラムです。
+webブラウザ上で、PC付属のマイクまたはPCに接続されたマイクに音声を入力し、その音声データにMPMアルゴリズムに基づいた処理を施すことで、入力音声の周波数(ピッチ)を検出するプログラムです。
 Startボタンを押すことでピッチ検出を開始し、検出されたピッチ、またそのピッチに相当する音名をを画面上に表示します。Stopボタンで停止します。
 
 ## MPMアルゴリズム
-<https://www.researchgate.net/profile/Geoff_Wyvill/publication/230554927_A_smarter_way_to_find_pitch/links/561a12f108aea80367211169/A-smarter-way-to-find-pitch.pdf>
+<https://www.researchgate.net/profile/Geoff_Wyvill/publication/230554927_A_smarter_way_to_find_pitch/links/561a12f108aea80367211169/A-smarter-way-to-find-pitch.pdf>    
 こちらの論文を参考にしました。
 
 大まかには次の手順でピッチを求めます
