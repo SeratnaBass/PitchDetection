@@ -4,7 +4,7 @@ webブラウザ上で、PC付属のマイクまたはPCに接続されたマイ�
 Startボタンを押すことでピッチ検出を開始し、検出されたピッチ、またそのピッチに相当する音名をを画面上に表示します。Stopボタンで停止します。
 
 ## MPMアルゴリズム
-<https://www.researchgate.net/profile/Geoff_Wyvill/publication/230554927_A_smarter_way_to_find_pitch/links/561a12f108aea80367211169/A-smarter-way-to-find-pitch.pdf>    
+<https://www.cs.otago.ac.nz/tartini/papers/A_Smarter_Way_to_Find_Pitch.pdf>    
 こちらの論文を参考にしました。
 
 大まかには次の手順でピッチを求めます
