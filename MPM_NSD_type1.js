@@ -81,7 +81,11 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     const sourceNode = audioContext.createMediaStreamSource(stream);
     const analyserNode = audioContext.createAnalyser();
     analyserNode.fftSize = 4096;
-    sourceNode.connect(analyserNode);
+    const gainNode = audioContext.createGain();
+    sourceNode.connect(gainNode);
+    gainNode.connect(analyserNode);
+
+    gainNode.gain.value = 0.6;
 
     let freq = 1024;
 
@@ -106,7 +110,9 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 
         // 実数、虚数の順で並んでいる変換後の配列からパワースペクトル配列を作る
         let powerSpectle = [];
-        for(var i = 0; i < data.length; i += 2) powerSpectle.push( Math.sqrt(data[i] * data[i] + data[i+1] * data[i+1]) );
+        // for(var i = 0; i < data.length; i += 2) powerSpectle.push( Math.sqrt(data[i] * data[i] + data[i+1] * data[i+1]) );
+        for(var i = 0; i < data.length; i += 2) powerSpectle.push( (data[i] * data[i] + data[i+1] * data[i+1]) );
+
 
         // 弱い周波数成分を除去することでノイズ抑制
         for(var i = 0; i < powerSpectle.length; i++){
@@ -173,19 +179,21 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         }
         T = peak[0];
 
+        // Parabolic Interpolationで補間
+        T = T + (NSDF[T-1] - NSDF[T+1]) / (2 * (NSDF[T-1] + NSDF[T+1] - 2 * NSDF[T]));
+
         // サンプリング周波数を周期で割って周波数すなわちピッチを算出
         // 倍音の検出を防ぐため、表示するピッチは検出したピッチのうち最小のものを採用(※1)
-        if(T != 0 && T != NaN){
+        if(T > 0 && !isNaN(T)){
             freq = Math.min(freq, 44100 / T);
             // console.log(freq);
-            freq = Math.floor(freq * 1000) / 1000; // 小数点以下第3位までで切り捨て
             const freqArea = document.getElementById('freqArea');
-            freqArea.innerHTML = freq;
+            freqArea.innerHTML = Math.floor(freq * 1000) / 1000; // 小数点第3位までで切り捨てて表示
             freqArea.innerHTML += "[Hz]";
 
             // 計算したピッチから音名を算出
             let noteNum = 69 + 12 * Math.log2(freq / 440);
-            noteNum = Math.floor( ( noteNum * 2  + 1 )/ 2 ); // 小数点以下第一位を四捨五入
+            noteNum = Math.round(noteNum); // 小数点以下第一位を四捨五入
             let keyName = scale[noteNum % 12];
             const scaleArea = document.getElementById('scaleArea');
             scaleArea.innerHTML = keyName;
