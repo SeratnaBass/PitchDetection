@@ -1,12 +1,14 @@
 # PitchDetectionについて
 
+<https://seratna-problem.github.io/PitchDetection/PitchDetection.html>
+
 <a href = "https://seratna-problem.github.io/PitchDetection/PitchDetection.html" target = "_blank">こちらのページ</a>
 
 webブラウザ上で、PC付属のマイクまたはPCに接続されたマイクに音声を入力し、その音声データにMPMアルゴリズムに基づいた処理を施すことで、入力音声の周波数(ピッチ)を検出するプログラムです。
 Startボタンを押すことでピッチ検出を開始し、検出されたピッチ、またそのピッチに相当する音名をを画面上に表示します。Stopボタンで停止します。
 
 ## MPMアルゴリズム
-<a href = "https://www.cs.otago.ac.nz/tartini/papers/A_Smarter_Way_to_Find_Pitch.pdf" target = "_blank">こちらの論文</a>
+<a href = "https://www.cs.otago.ac.nz/tartini/papers/A_Smarter_Way_to_Find_Pitch.pdf">こちらの論文</a>
 を参考にしました。
 
 大まかには次の手順でピッチを求めます
