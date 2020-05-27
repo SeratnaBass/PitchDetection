@@ -80,12 +80,16 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     const audioContext = new AudioContext();
     const sourceNode = audioContext.createMediaStreamSource(stream);
     const analyserNode = audioContext.createAnalyser();
-    analyserNode.fftSize = 4096;
     const gainNode = audioContext.createGain();
+    const biquadFilterNode = audioContext.createBiquadFilter();
     sourceNode.connect(gainNode);
-    gainNode.connect(analyserNode);
+    gainNode.connect(biquadFilterNode);
+    biquadFilterNode.connect(analyserNode);
 
+    analyserNode.fftSize = 4096;
     gainNode.gain.value = 0.6;
+    // biquadFilterNode.type = 'lowpass';
+    // biquadFilterNode.frequency.value = 1500; // ギターなどのチューニングに用いる場合のフィルタ
 
     let freq = 1024;
 
@@ -215,6 +219,8 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     stop.onclick = function() {
         start.disabled = false;
         stop.disabled = true;
+        freqArea.innerHTML = null;
+        scaleArea.innerHTML = null;
     }
 
     // (※1)のコードのため、定期的に周波数をリセットしないと継続的にピッチ検出機能を使えない
