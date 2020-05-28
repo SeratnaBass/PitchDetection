@@ -86,7 +86,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
     gainNode.connect(biquadFilterNode);
     biquadFilterNode.connect(analyserNode);
 
-    analyserNode.fftSize = 4096;
+    analyserNode.fftSize = 16384;
     gainNode.gain.value = 0.6;
     // biquadFilterNode.type = 'lowpass';
     // biquadFilterNode.frequency.value = 1500; // ギターなどのチューニングに用いる場合のフィルタ
