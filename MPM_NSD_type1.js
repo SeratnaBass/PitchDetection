@@ -193,14 +193,24 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
             // console.log(freq);
             const freqArea = document.getElementById('freqArea');
             freqArea.innerHTML = Math.floor(freq * 1000) / 1000; // 小数点第3位までで切り捨てて表示
-            freqArea.innerHTML += "[Hz]";
 
             // 計算したピッチから音名を算出
             let noteNum = 69 + 12 * Math.log2(freq / 440);
-            noteNum = Math.round(noteNum); // 小数点以下第一位を四捨五入
-            let keyName = scale[noteNum % 12];
+            let higher = 0;
+            let lower = 0;
+            if(noteNum - Math.floor(noteNum) < Math.ceil(noteNum) - noteNum){
+                higher = Math.round( ( Math.ceil(noteNum) - noteNum ) * 10 );
+            }
+            else lower = Math.round( ( noteNum - Math.floor(noteNum) ) * 10 );
+            let keyName = scale[Math.round(noteNum) % 12];
             const scaleArea = document.getElementById('scaleArea');
+            const lowerArea = document.getElementById('lowerArea');
+            const higherArea = document.getElementById('higherArea');
+            lowerArea.innerHTML = null;
+            higherArea.innerHTML = null;
             scaleArea.innerHTML = keyName;
+            for(var i = 0; i < lower; i++) lowerArea.innerHTML += '|';
+            for(var i = 0; i < higher; i++) higherArea.innerHTML += '|';
             // console.log(noteNum);
         }
 
@@ -220,7 +230,9 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         start.disabled = false;
         stop.disabled = true;
         freqArea.innerHTML = null;
-        scaleArea.innerHTML = null;
+        scaleArea.innerHTML = 'Pitch';
+        lowerArea.innerHTML = null;
+        higherArea.innerHTML = null;
     }
 
     // (※1)のコードのため、定期的に周波数をリセットしないと継続的にピッチ検出機能を使えない
