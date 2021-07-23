@@ -156,7 +156,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         // 正規化した自己相関関数の最大値を探す
         let NSDFmax = 0;
         let tMax = 0;
-        for(var i = negativeCross; i < NSDF.length / 2; i++){
+        for(var i = negativeCross; i < NSDF.length / 2 ; i++){
             if(NSDF[i] > NSDFmax) tMax = i;
             NSDFmax = Math.max(NSDFmax, NSDF[i]);
         }
@@ -177,7 +177,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         let T = 0;
         let peak = [];
         for(var i = negativeCross; i < dd.length; i++){
-            if(dd[i] <= 0 && NSDF[i] >= NSDFmax * 0.8){
+            if(dd[i] <= 0 && NSDF[i] >= NSDFmax * 0.9){
                 peak.push(i);
             }
         }
@@ -189,7 +189,7 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
         // サンプリング周波数を周期で割って周波数すなわちピッチを算出
         // 倍音の検出を防ぐため、表示するピッチは検出したピッチのうち最小のものを採用(※1)
         if(T > 0 && !isNaN(T)){
-            freq = Math.min(freq, 44100 / T);
+            freq = Math.min(freq, 48000 / T);
             // console.log(freq);
             const freqArea = document.getElementById('freqArea');
             freqArea.innerHTML = Math.floor(freq * 1000) / 1000; // 小数点第3位までで切り捨てて表示
