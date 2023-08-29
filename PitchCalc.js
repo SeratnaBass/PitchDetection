@@ -1,4 +1,4 @@
-import DFT from './DFT.js'
+import DFT from './DFT.js';
 
 const start = document.querySelector('#start');
 const stop = document.querySelector('#stop');

@@ -1,5 +1,5 @@
 // 高速フーリエ変換
-class DFT {
+export class DFT {
 
     static swap(v, a, b) {
         let ar = v[a + 0];
