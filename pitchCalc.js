@@ -24,7 +24,6 @@ export function pitchCalc() {
     // for(var i = 0; i < data.length; i += 2) powerSpectle.push( Math.sqrt(data[i] * data[i] + data[i+1] * data[i+1]) );
     for(var i = 0; i < data.length; i += 2) powerSpectle.push( (data[i] * data[i] + data[i+1] * data[i+1]) );
 
-
     // 弱い周波数成分を除去することでノイズ抑制
     for(var i = 0; i < powerSpectle.length; i++){
         if(powerSpectle[i] <= 4) powerSpectle[i] = 0;
@@ -95,6 +94,7 @@ export function pitchCalc() {
 
     // サンプリング周波数を周期で割って周波数すなわちピッチを算出
     // 倍音の検出を防ぐため、表示するピッチは検出したピッチのうち最小のものを採用(※1)
+    const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
     if(T > 0 && !isNaN(T)){
         freq = Math.min(freq, 48000 / T);
         // console.log(freq);

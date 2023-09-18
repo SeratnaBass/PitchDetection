@@ -2,12 +2,6 @@ import {pitchCalc} from './pitchCalc.js';
 
 const start = document.querySelector('#start');
 const stop = document.querySelector('#stop');
-// const canvas = document.querySelector('#canvas');
-// const drawContext = canvas.getContext('2d');
-// const cw = canvas.width;
-// const ch = canvas.height;
-
-const scale = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 
@@ -22,8 +16,6 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 
     analyserNode.fftSize = 16384;
     gainNode.gain.value = 0.6;
-    // biquadFilterNode.type = 'lowpass';
-    // biquadFilterNode.frequency.value = 1500; // ギターなどのチューニングに用いる場合のフィルタ
 
     let freq = 1024;
 
