@@ -27,8 +27,6 @@ navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
 
     let freq = 1024;
 
-    
-
     start.onclick = function() {
         start.disabled = true;
         stop.disabled = false;
